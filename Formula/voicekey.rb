@@ -1,9 +1,9 @@
 class Voicekey < Formula
   desc "VoiceKey Mac receiver: phone types Chinese over LAN, paste at Mac cursor"
   homepage "https://github.com/chencanxin/voicekey-dist"
-  version "0.7.1"
-  url "https://codeload.github.com/chencanxin/voicekey-dist/tar.gz/d0e6ca5b5361a52b832f51658dbc261560451678"
-  sha256 "b0a0c5808670c83c92affbec5e37067050136e8831d075ee53922bacd9e85358"
+  version "0.7.2"
+  url "https://codeload.github.com/chencanxin/voicekey-dist/tar.gz/65dfac1230b886d4d4f9013fde429cb9668dbc92"
+  sha256 "aaba367744fcccb2bf322f0cd3b04e05ef32629a9f45248c8b586146730926c7"
   license "MIT"
 
   depends_on "go" => :build
@@ -21,7 +21,7 @@ class Voicekey < Formula
     <<~EOS
       启动：终端运行 voicekey（会自动打开浏览器仪表盘，数据端口 7979）。
       首次运行后需授权一次：系统设置 → 隐私与安全性 → 辅助功能 → 勾选 voicekey。
-      更新检查已内置：启动时自动比对版本，有新版本会提示（brew upgrade voicekey）。
+      自更新已内置：每 60 秒自动检查新版本，自动 brew upgrade 并自重启（辅助功能授权可能需重新勾选一次）。
     EOS
   end
 end
