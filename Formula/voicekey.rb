@@ -1,9 +1,9 @@
 class Voicekey < Formula
   desc "VoiceKey Mac receiver: phone types Chinese over LAN, paste at Mac cursor"
   homepage "https://github.com/chencanxin/voicekey-dist"
-  version "0.7.9"
-  url "https://codeload.github.com/chencanxin/voicekey-dist/tar.gz/fd7acec069dd44603971e6b27494dd593fcb5551"
-  sha256 "1410b4a998d6a041c5497fef9044bb6b35529586e009b143f691e41d06322744"
+  version "0.7.10"
+  url "https://codeload.github.com/chencanxin/voicekey-dist/tar.gz/008fdc15d4e57b052de5d84d4816219619b358a7"
+  sha256 "82d8613847886e13fe93ba6cc8e96c82994eb5e88737875960d0540648e41669"
   license "MIT"
 
   depends_on "go" => :build
