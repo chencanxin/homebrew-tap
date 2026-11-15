@@ -17,11 +17,18 @@ class Voicekey < Formula
     end
     # 自签名证书固定 TCC 辅助功能授权锚点（DR 锚定证书而非单次构建哈希），
     # 用户只需授权一次，后续发版不再要求重新勾选。
-    # 证书不在本机时跳过——voicekey 自更新流程会在升级后自行补签兜底。
-    keychain = "#{Dir.home}/Library/Keychains/login.keychain-db"
-    if system("security", "find-certificate", "-c", "VoiceKey Dev", keychain, out: "/dev/null", err: "/dev/null")
-      system "codesign", "--force", "--sign", "VoiceKey Dev",
-             "--identifier", "com.chencanxin.voicekey", bin/"voicekey"
+    # 证书不在本机或 brew 沙箱限制时跳过——voicekey 自更新流程会在
+    # 升级后由运行中的进程自行补签兜底（见 macrecv/selfupdate.go）。
+    begin
+      require "etc"
+      keychain = "#{Etc.getpwuid.dir}/Library/Keychains/login.keychain-db"
+      if File.exist?(keychain) &&
+         system("security", "find-certificate", "-c", "VoiceKey Dev", keychain)
+        system "codesign", "--force", "--sign", "VoiceKey Dev",
+               "--identifier", "com.chencanxin.voicekey", bin/"voicekey"
+      end
+    rescue StandardError
+      ohai "签名跳过：brew 沙箱限制，将由 voicekey 运行时补签"
     end
   end
 
